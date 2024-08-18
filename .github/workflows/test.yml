@@ -22,4 +22,5 @@ jobs:
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
           cargo binstall wasm-pack -y
           export PATH="$HOME/.cargo/bin:$PATH"
+          source ~/.bashrc
           wasm-pack build --release --target web --out-dir ./web
