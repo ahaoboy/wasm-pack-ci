@@ -16,9 +16,11 @@ jobs:
         with:
           rustflags: "-A warnings"
           toolchain: "nightly"
-      - name: test
+      - name: install wasm-pack
         run: |
           rustup target add wasm32-unknown-unknown
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
           cargo binstall wasm-pack -y
+      - name: build
+        run: |
           wasm-pack build --release --target web --out-dir ./web
