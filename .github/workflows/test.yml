@@ -1,0 +1,24 @@
+name: test
+
+on: [push]
+
+jobs:
+  build:
+    name: build
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: "nightly"
+          rustflags: "-A warnings"
+
+      - name: test
+        shell: powershell
+        run: |
+          Set-ExecutionPolicy Unrestricted -Scope Process; iex (iwr "https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.ps1").Content
+          cargo binstall wasm-pack -y
+          wasm-pack build --release --target web --out-dir ./web
