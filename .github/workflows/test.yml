@@ -25,4 +25,4 @@ jobs:
           export PATH="$HOME/.cargo/bin:$PATH"
           echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
           source ~/.bashrc
-          wasm-pack build --release --target web --out-dir ./web
+          /home/runner/.cargo/bin/wasm-pack build --release --target web --out-dir ./web
