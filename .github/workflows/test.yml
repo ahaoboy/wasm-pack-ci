@@ -17,10 +17,12 @@ jobs:
           rustflags: "-A warnings"
           toolchain: "nightly"
       - name: install wasm-pack
+        shell: "bash"
         run: |
           rustup target add wasm32-unknown-unknown
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
           cargo binstall wasm-pack -y
           export PATH="$HOME/.cargo/bin:$PATH"
+          echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
           source ~/.bashrc
           wasm-pack build --release --target web --out-dir ./web
