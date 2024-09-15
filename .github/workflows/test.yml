@@ -16,7 +16,7 @@ jobs:
         with:
           rustflags: "-A warnings"
           toolchain: "nightly"
-          targets: "wasm32-unknown-unknown"
+          target: "wasm32-unknown-unknown"
 
       - name: install wasm-pack
         shell: "bash"
