@@ -11,16 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Rust
-        uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          rustflags: "-A warnings"
-          toolchain: "nightly"
-          target: "wasm32-unknown-unknown"
-
       - name: install wasm-pack
         shell: "bash"
         run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh -s -- -y --default-toolchain nightly
+          rustup target add wasm32-unknown-unknown
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
           cargo binstall wasm-pack -y --force
           wasm-pack build --release --target web --out-dir ./web
